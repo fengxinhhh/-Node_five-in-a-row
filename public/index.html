@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title></title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <form class="form-horizontal" method="get" action="add" name="demo" id="for">
+        <div class="form-group">
+            <label for="text" class="col-sm-2 control-label">组队对战：</label>
+            <div class="col-sm-2">
+                <select class="form-control" id="room" name="room">
+                    <option v-for="(u,i) in Null" v-cloak>{{u}}</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">组队对战</button>
+        </div>
+    </form>
+</div>
+<script src="js/jquery-1.11.3.min.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/vue.js"></script>
+<script type="text/javascript">
+    var Null;
+    var full;
+    //请求房间列表1-999号房并渲染在主页
+    $.get("/check", function (result) {
+        Null = result.Null;
+        var app = new Vue({
+            el: '#app',
+            data: {
+                "Null": Null
+        }
+        });
+    });
+</script>
+</body>
+</html>
